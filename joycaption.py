@@ -27,7 +27,7 @@ device = model_management.get_torch_device()
 
 
 # PIL.Image.MAX_IMAGE_PIXELS = 933120000   # Quiets Pillow from giving warnings on really large images (WARNING: Exposes a risk of DoS from malicious images)
-device = "cuda:0" if torch.cuda.is_available() else "cpu"
+# device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
 
 preset_prompts = [
@@ -66,7 +66,8 @@ class JoyCaption:
             attention.out_proj = torch.nn.Linear(attention.embed_dim, attention.embed_dim, device=self.llava_model.device, dtype=torch.bfloat16)
 
         else: 
-            self.llava_model = LlavaForConditionalGeneration.from_pretrained(model, torch_dtype="bfloat16", device_map="auto").eval()
+            self.llava_model = LlavaForConditionalGeneration.from_pretrained(model, torch_dtype="bfloat16").eval()
+            self.llava_model.to(device)
         assert isinstance(self.llava_model, LlavaForConditionalGeneration)
     #@torch.no_grad()
     @torch.inference_mode()
