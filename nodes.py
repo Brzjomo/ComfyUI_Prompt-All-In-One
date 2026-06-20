@@ -6,7 +6,7 @@ from .qwen import (
     APIQwenImgOrVideo2Text,
     APIQwenAudio2Text,
 )
-from .deepseek import DeepSeekV3, DeepSeekR1
+from .deepseek import DeepSeekV4Flash, DeepSeekV4Pro
 from .gemini import APIGeminiTextGen, APIGeminiImgOrAudioOrVideo2Text, APIGeminiImageGen, APIGeminiTextUnderstand
 from .joycaption import JoyCaptionRun
 from .ollama_prompt_gen import OllamaPromptGen
@@ -15,8 +15,10 @@ from .audio_to_prompt import KeOmniRRun, MultiLinePromptKOR
 
 NODE_CLASS_MAPPINGS = {
     "APIGeminiTextUnderstand": APIGeminiTextUnderstand,
-    "DeepSeekV3": DeepSeekV3,
-    "DeepSeekR1": DeepSeekR1,
+    "DeepSeekV3": DeepSeekV4Flash,
+    "DeepSeekV4Flash": DeepSeekV4Flash,
+    "DeepSeekR1": DeepSeekV4Pro,
+    "DeepSeekV4Pro": DeepSeekV4Pro,
     "APIQwenTextGen": APIQwenTextGen,
     "APIQwenTextGen_R": APIQwenTextGen_R,
     "APIQwenImage2Text": APIQwenImage2Text,
@@ -34,8 +36,10 @@ NODE_CLASS_MAPPINGS = {
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "APIGeminiTextUnderstand": "API Gemini Text Understand",
-    "DeepSeekV3": "DeepSeek V3",
-    "DeepSeekR1": "DeepSeek R1",
+    "DeepSeekV3": "DeepSeek V4 Flash (legacy)",
+    "DeepSeekV4Flash": "DeepSeek V4 Flash",
+    "DeepSeekR1": "DeepSeek V4 Pro (legacy)",
+    "DeepSeekV4Pro": "DeepSeek V4 Pro",
     "APIQwenTextGen": "API Qwen Text Gen",
     "APIQwenTextGen_R": "API Qwen Text Gen_R",
     "APIQwenImage2Text": "API Qwen Image2Text",

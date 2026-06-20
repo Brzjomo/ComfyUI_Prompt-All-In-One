@@ -49,13 +49,20 @@ def sample_video_frames(video_tensor):
     return frames
 
 
+def get_ollama_models():
+    try:
+        return [i.model for i in ollama.list().models]
+    except Exception:
+        return ["poluramus/llama-3.2ft_flux-prompting_v0.5:latest"]
+
+
 class OllamaPromptGen:
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required": {
                 "prompt": ("STRING", {"default": "", "multiline": True}),
-                "model": ([i.model for i in ollama.list().models],
+                "model": (get_ollama_models(),
                     {"default": "poluramus/llama-3.2ft_flux-prompting_v0.5:latest"},
                 ),
                 "max_new_tokens": ("INT", {"default": 200, "min": 0, "max": 20000}),

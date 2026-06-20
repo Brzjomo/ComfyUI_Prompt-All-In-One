@@ -104,7 +104,7 @@ class APIGeminiTextGen:
         max_output_tokens,
         seed,
     ):
-        if proxy.strip() != "" or proxy.strip() != "http://127.0.0.1:None":
+        if proxy.strip() != "" and proxy.strip() != "http://127.0.0.1:None":
             os.environ["http_proxy"] = proxy
             os.environ["https_proxy"] = proxy
             os.environ['NO_PROXY'] = "localhost,127.0.0.1"
@@ -115,7 +115,7 @@ class APIGeminiTextGen:
             API_KEY = api_key
         else:
             raise ValueError("API Key is not set")
-                
+
         client = genai.Client(
             api_key=API_KEY,
         )
@@ -182,7 +182,7 @@ class APIGeminiImgOrAudioOrVideo2Text:
         audio=None,
         video=None,
     ):
-        if proxy.strip() != "" or proxy.strip() != "http://127.0.0.1:None":
+        if proxy.strip() != "" and proxy.strip() != "http://127.0.0.1:None":
             os.environ["http_proxy"] = proxy
             os.environ["https_proxy"] = proxy
             os.environ['NO_PROXY'] = "localhost,127.0.0.1"
@@ -286,7 +286,7 @@ class APIGeminiTextUnderstand:
         max_output_tokens,
         seed,
     ):
-        if proxy.strip() != "" or proxy.strip() != "http://127.0.0.1:None":
+        if proxy.strip() != "" and proxy.strip() != "http://127.0.0.1:None":
             os.environ["http_proxy"] = proxy
             os.environ["https_proxy"] = proxy
             os.environ['NO_PROXY'] = "localhost,127.0.0.1"
@@ -367,7 +367,7 @@ class APIGeminiImageGen:
         seed,
         image=None,
     ):
-        if proxy.strip() != "" or proxy.strip() != "http://127.0.0.1:None":
+        if proxy.strip() != "" and proxy.strip() != "http://127.0.0.1:None":
             os.environ["http_proxy"] = proxy
             os.environ["https_proxy"] = proxy
             os.environ['NO_PROXY'] = "localhost,127.0.0.1"

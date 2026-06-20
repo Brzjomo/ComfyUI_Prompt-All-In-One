@@ -2,8 +2,7 @@ from openai import OpenAI
 import os
 
 
-
-class DeepSeekV3:
+class DeepSeekV4Flash:
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -13,9 +12,9 @@ class DeepSeekV3:
                 "prompt": ("STRING", {"default": "", "multiline": True}),
                 "model": (
                     [
-                        "DeepSeek-V3",
+                        "deepseek-v4-flash",
                     ],
-                    {"default": "DeepSeek-V3"},
+                    {"default": "deepseek-v4-flash"},
                 ),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             },
@@ -43,24 +42,24 @@ class DeepSeekV3:
             API_KEY = api_key
         else:
             raise ValueError("API Key is not set")
-                
+
         client = OpenAI(
             api_key=API_KEY,
             base_url="https://api.deepseek.com",
         )
         completion = client.chat.completions.create(
-            model="deepseek-chat",
+            model=model,
             messages=[
                 {'role': 'system', 'content': system_prompt},
                 {'role': 'user', 'content': prompt}],
+            seed=seed,
             stream=False
             )
-            
+
         return (completion.choices[0].message.content,)
 
 
-
-class DeepSeekR1:
+class DeepSeekV4Pro:
     @classmethod
     def INPUT_TYPES(s):
         return {
@@ -69,9 +68,9 @@ class DeepSeekR1:
                 "prompt": ("STRING", {"default": "", "multiline": True}),
                 "model": (
                     [
-                        "DeepSeek-R1",
+                        "deepseek-v4-pro",
                     ],
-                    {"default": "DeepSeek-R1"},
+                    {"default": "deepseek-v4-pro"},
                 ),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             },
@@ -98,17 +97,17 @@ class DeepSeekR1:
             API_KEY = api_key
         else:
             raise ValueError("API Key is not set")
-                
+
         client = OpenAI(
             api_key=API_KEY,
             base_url="https://api.deepseek.com",
         )
         completion = client.chat.completions.create(
-            model='deepseek-reasoner',
+            model=model,
             messages=[
                 {'role': 'user', 'content': prompt}],
+            seed=seed,
             stream=False
             )
-            
-        return (completion.choices[0].message.content, completion.choices[0].message.reasoning_content,)
 
+        return (completion.choices[0].message.content, completion.choices[0].message.reasoning_content,)

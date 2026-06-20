@@ -97,6 +97,7 @@ class APIQwenTextGen:
             messages=[
                 {'role': 'system', 'content': system_prompt},
                 {'role': 'user', 'content': prompt}],
+            seed=seed,
             )
             
         return (completion.choices[0].message.content,)
@@ -157,6 +158,7 @@ class APIQwenTextGen_R:
             messages=[
                 {"role": "user", "content": prompt}
             ],
+            seed=seed,
             stream=True  # 启用流式输出
         )
 
@@ -254,6 +256,7 @@ class APIQwenImage2Text:
                 model=model,
                 messages=messages,
                 modalities=["text"],
+                seed=seed,
                 stream=True,
             )
             # 遍历流式输出的每个 chunk
@@ -270,6 +273,7 @@ class APIQwenImage2Text:
             completion = client.chat.completions.create(
                 model=model,
                 messages=messages,
+                seed=seed,
             )
             return (completion.choices[0].message.content,)
 
@@ -341,6 +345,7 @@ class APIQwenImage2Text_R:
                     ],
                 },
             ],
+            seed=seed,
             stream=True,  # 启用流式输出
         )
 
@@ -445,6 +450,7 @@ class APIQwenImgOrVideo2Text:
                 model=model,
                 messages=messages,
                 modalities=["text"],
+                seed=seed,
                 stream=True,
             )
             # 遍历流式输出的每个 chunk
@@ -461,8 +467,9 @@ class APIQwenImgOrVideo2Text:
             completion = client.chat.completions.create(
                 model=model,
                 messages=messages,
+                seed=seed,
             )
-                
+
             return (completion.choices[0].message.content,)
 
 
@@ -541,6 +548,7 @@ class APIQwenAudio2Text:
             model=model,
             messages=messages,
             modalities=["text"],
+            seed=seed,
             stream=True,
         )
         # 遍历流式输出的每个 chunk
